@@ -1,0 +1,105 @@
+<%- include('header') %>
+
+    <div class="container">
+        <form action="/product_create" method="POST" role="form" id="product_form">
+            <legend>Form thêm mới sản phẩm</legend>
+            <div class="form-group">
+                <label for="">Tên sản phẩm</label>
+                <input type="text" class="form-control" name="name" placeholder="Input name">
+                <small id="name_error" class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <label for="">Giá sản phẩm</label>
+                <input type="number" class="form-control" name="price" placeholder="Input price">
+                <small id="price_error" class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <label for="">Ảnh sản phẩm</label>
+                <input type="text" class="form-control" name="image" placeholder="Input image">
+                <small id="img_error" class="text-danger"></small>
+            </div>
+            <div class="form-group">
+                <label for="">Id danh mục</label>
+                <select name="category_id" id="input" class="form-control" required="required">
+                    <% data.forEach((item, key)=> { %>
+                        <option value="<%= item.id %>">
+                            <%= item.name %>
+                        </option>
+                        <% }); %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Trạng thái sản phẩm</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="status" value="0" checked>
+                        Hiển thị
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="status" value="1">
+                        Tạm ẩn
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Chi tiết sản phẩm</label>
+                <input type="text" class="form-control" name="description" placeholder="Input description">
+                <small id="d_error" class="text-danger"></small>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        </form>
+    </div>
+
+    <%- include('footer') %>
+
+        <script>
+            product_form.onsubmit = function () {
+                if (product_form.name.value == '') {
+                    product_form.name.style.border = '1px solid red';
+                    name_error.innerHTML = 'Không được để trống';
+                    product_form.name.focus();
+                    return false;
+                } else {
+                    name_error.innerHTML = '';
+                    product_form.name.style.border = '1px solid lightblue';
+                };
+                if (product_form.price.value == '') {
+                    product_form.price.style.border = '1px solid red';
+                    price_error.innerHTML = 'Không được để trống';
+                    product_form.price.focus();
+                    return false;
+                } else {
+                    price_error.innerHTML = '';
+                    product_form.price.style.border = '1px solid lightblue';
+                };
+                if (product_form.sale_price.value == '') {
+                    product_form.sale_price.style.border = '1px solid red';
+                    sale_error.innerHTML = 'Không được để trống';
+                    product_form.sale_price.focus();
+                    return false;
+                } else {
+                    sale_error.innerHTML = '';
+                    product_form.sale_price.style.border = '1px solid lightblue';
+                };
+                if (product_form.image.value == '') {
+                    product_form.image.style.border = '1px solid red';
+                    img_error.innerHTML = 'Không được để trống';
+                    product_form.image.focus();
+                    return false;
+                } else {
+                    img_error.innerHTML = '';
+                    product_form.image.style.border = '1px solid lightblue';
+                };
+                if (product_form.description.value == '') {
+                    product_form.description.style.border = '1px solid red';
+                    d_error.innerHTML = 'Không được để trống';
+                    product_form.description.focus();
+                    return false;
+                } else {
+                    d_error.innerHTML = '';
+                    product_form.description.style.border = '1px solid lightblue';
+                };
+            }
+        </script>

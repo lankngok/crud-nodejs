@@ -1,0 +1,77 @@
+<%- include('header') %>
+
+    <div class="container">
+        <h2>sản phẩm</h2>
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <form method="POST" role="form" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" name="name" class="form-control bg-light border-0 small" placeholder="Search for...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <li class="nav-item dropdown no-arrow">
+                    <a href="/product_create" class="btn btn-sm btn-primary">Thêm mới sản phẩm</a>
+                </li>
+            </ul>
+        </nav>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <!-- <th>Sale_price</th> -->
+                    <th>Image</th>
+                    <th>CategoryId</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((item, key)=> { %>
+                    <tr>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.name %>
+                        </td>
+                        <td>
+                            <%= item.price %>
+                        </td>
+                        <!-- <td>
+                            <%= item.sale_price %>
+                        </td> -->
+                        <td>
+                            <img src="<%= item.image%>" width="50px" alt="">
+                        </td>
+                        <td>
+                            <%= item.category_id %>
+                        </td>
+                        <td>
+                            <%= item.status==1 ? 'Tạm ẩn' : 'Hiển thị' %>
+                        </td>
+                        <td>
+                            <%= item.description%>
+                        </td>
+                        
+                        <td>
+                            <a onclick="return confirm('chắc chưa')" href="/product_delete/<%= item.id %>"
+                                class="btn btn-danger">xoá</a>
+                            <a href="/product_edit/<%= item.id %>" class="btn btn-primary">sửa</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('footer') %>
